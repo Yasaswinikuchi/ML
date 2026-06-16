@@ -1,24 +1,14 @@
-import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import PolynomialFeatures
+import numpy as np
 
-x = np.array([1,2,3,4,5,6]).reshape(-1,1)
-y = np.array([2,4,5,4,5,7])
+X = np.array([1,2,3,4,5]).reshape(-1,1)
+y = np.array([2,3,5,4,6])
 
-# Linear Regression
-lr = LinearRegression()
-lr.fit(x, y)
+model = LinearRegression()
+model.fit(X,y)
 
-# Polynomial Regression
-poly = PolynomialFeatures(degree=2)
-x_poly = poly.fit_transform(x)
+pred = model.predict([[7]])
 
-pr = LinearRegression()
-pr.fit(x_poly, y)
-
-plt.scatter(x, y, color='red')
-plt.plot(x, lr.predict(x), color='blue', label='Linear')
-plt.plot(x, pr.predict(x_poly), color='green', label='Polynomial')
-plt.legend()
-plt.show()
+print("Coefficient:", model.coef_)
+print("Intercept:", model.intercept_)
+print("Prediction for x=7:", pred)
